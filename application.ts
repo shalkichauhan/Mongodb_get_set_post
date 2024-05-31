@@ -1,3 +1,7 @@
+import {manuplateData} from "./manplate";
+
+const myFile = require('./manplate')
+
 const express = require('express')
 const app = express();
 
@@ -10,6 +14,7 @@ app.use(express.json());
 //details
 app.post('/details',(req:any,res:any)=>{
 const myUserdata = req.body.data
+    manuplateData(req.body.data)
    console.log(" The User Data is :", myUserdata )
 })
 
@@ -17,3 +22,4 @@ const myUserdata = req.body.data
 app.listen(3000,()=>{
     console.log(" server is running!")
 });
+
