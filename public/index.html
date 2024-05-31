@@ -35,20 +35,30 @@
 </div>
 
 <script>
+    async function myFun() {
+            const textAreaContent = document.getElementById('textArea').value;
+            await fetch('/details', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({data: textAreaContent})
+            }).then((response)=>{
+
+                if(response){
+                    console.log('this is ny response',response
+                    )
+                }
+            }
+            )
+    }
+        document.getElementById('click_here').addEventListener('click', myFun)
 
 
-    document.getElementById('click_here').addEventListener('click', function() {
-        const textAreaContent = document.getElementById('textArea').value;
 
-        fetch('/details', {
-            method:'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({data:textAreaContent})
 
-        })
-    });
+
+
 </script>
 </body>
 </html>

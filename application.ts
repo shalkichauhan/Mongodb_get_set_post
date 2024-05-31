@@ -1,6 +1,5 @@
 import {manuplateData} from "./manplate";
 
-const myFile = require('./manplate')
 
 const express = require('express')
 const app = express();
@@ -11,11 +10,13 @@ const pathjoin= path.join(__dirname,'/public')
 app.use(express.static(pathjoin))
 app.use(express.json());
 
-//details
 app.post('/details',(req:any,res:any)=>{
 const myUserdata = req.body.data
     manuplateData(req.body.data)
    console.log(" The User Data is :", myUserdata )
+    res.send({
+        message:" Successfully received!"
+    })
 })
 
 
