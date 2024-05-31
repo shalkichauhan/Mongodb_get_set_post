@@ -31,13 +31,23 @@
     <h1>Button and Text Area Example</h1>
     <textarea id="textArea" placeholder="Type your text here..."></textarea>
     <br>
-    <button id="myButton">Click Me</button>
+    <button id="click_here">Click Me</button>
 </div>
 
 <script>
-    document.getElementById('myButton').addEventListener('click', function() {
+
+
+    document.getElementById('click_here').addEventListener('click', function() {
         const textAreaContent = document.getElementById('textArea').value;
-        alert('Text Area Content: ' + textAreaContent);
+
+        fetch('/details', {
+            method:'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({data:textAreaContent})
+
+        })
     });
 </script>
 </body>
