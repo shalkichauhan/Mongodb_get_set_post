@@ -1,5 +1,4 @@
-import {manuplateData, RequestData} from "./manplate";
-
+import { receiveUserData, RequestData} from "./manplate";
 
 const express = require('express')
 const app = express();
@@ -12,7 +11,8 @@ app.use(express.json());
 
 app.post('/details',(req:RequestData,res:any)=>{
 const myUserdata = req.body.email
-    manuplateData(req.body.email)
+    receiveUserData(req.body.email)
+
    console.log(" The User Data is :", myUserdata )
     res.send({
         message:" Successfully received!"
