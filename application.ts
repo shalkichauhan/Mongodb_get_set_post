@@ -1,4 +1,4 @@
-import {manuplateData} from "./manplate";
+import {manuplateData, RequestData} from "./manplate";
 
 
 const express = require('express')
@@ -10,9 +10,9 @@ const pathjoin= path.join(__dirname,'/public')
 app.use(express.static(pathjoin))
 app.use(express.json());
 
-app.post('/details',(req:any,res:any)=>{
-const myUserdata = req.body.data
-    manuplateData(req.body.data)
+app.post('/details',(req:RequestData,res:any)=>{
+const myUserdata = req.body.email
+    manuplateData(req.body.email)
    console.log(" The User Data is :", myUserdata )
     res.send({
         message:" Successfully received!"

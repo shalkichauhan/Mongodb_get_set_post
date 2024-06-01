@@ -37,20 +37,18 @@
 <script>
     async function myFun() {
             const textAreaContent = document.getElementById('textArea').value;
-            await fetch('/details', {
+            const response = await fetch('/details', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({data: textAreaContent})
-            }).then((response)=>{
-
-                if(response){
-                    console.log('this is ny response',response
-                    )
-                }
+                body: JSON.stringify({email: textAreaContent})
+            })
+            if(response){
+                const data =await response.json()
+                console.log('my data is :' ,data.message)
             }
-            )
+
     }
         document.getElementById('click_here').addEventListener('click', myFun)
 
