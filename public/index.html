@@ -26,7 +26,8 @@
         }
     </style>
 </head>
-<body>
+
+
 <div class="container">
     <h1>Button and Text Area Example</h1>
     <textarea id="textArea" placeholder="Type your text here..."></textarea>
@@ -35,7 +36,11 @@
 </div>
 
 <script>
-    async function myFun() {
+    try {
+
+        let firstName, lastName, email, teamID
+
+        async function myFun() {
             const textAreaContent = document.getElementById('textArea').value;
             const response = await fetch('/details', {
                 method: 'POST',
@@ -44,16 +49,39 @@
                 },
                 body: JSON.stringify({email: textAreaContent})
             })
-            if(response){
-                const data =await response.json()
-                console.log('my data is :' ,data)
+            if (response) {
+
+
+                const data = await response.json()
+
+                if (data.message) {
+                    console.log(data.message)
+                } else {
+
+
+                    firstName = data.firstname
+
+                    lastName = data.lastName
+                    email = data.email
+                    teamID = data.teamID
+                    document.getElementById('firstNameCell').textContent = firstName;
+                    document.getElementById('lastNameCell').textContent = lastName;
+                    document.getElementById('emailCell').textContent = email;
+                    document.getElementById('teamIDCell').textContent = teamID;
+
+
+                    console.log('my data is :', data)
+                }
             }
 
-    }
+        }
+
         document.getElementById('click_here').addEventListener('click', myFun)
 
 
-
+    }catch(error){
+        console.log(" there is an error to get the Data from !details!!!!!!!! endPoint", error)
+    }
 
 
 
@@ -62,13 +90,7 @@
 
 
 </body>
-<form id="userForm">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <button type="submit">Submit</button>
-</form>
-
-<table border="1">
+<body><table border="1">
     <thead>
     <tr>
         <th>Header 1</th>
@@ -78,31 +100,35 @@
     </thead>
     <tbody>
     <tr>
-        <td>Data 1</td>
-        <td>Data 2</td>
+        <td>First Name</td>
+        <!--        <td>{firstName}</td>-->
+        <td id="firstNameCell"></td>
 
 
     </tr>
     <tr>
-        <td>Data </td>
-        <td>Data </td>
-
+        <td>Last Name </td>
+        <!--        <td> {{lastName}}</td>-->
+        <td id="lastNameCell"></td>
     </tr>
     </tr>
 
-    <td>Data 3</td>
-    <td>Data 4</td>
+    <td>email</td>
+    <!--    <td> {{email}}</td>-->
+    <td id="emailCell"></td>
 
     <tr>
     </tr>
-    <td>Data 3</td>
-    <td>Data 4</td>
+    <td>Team ID</td>
+    <!--    <td> {{teamID} }</td>-->
+    <td id="teamIDCell"></td>
 
     </tr>
     </tbody>
 </table>
-
-
-
-
+<!--<form id="userForm">-->
+<!--    <label for="email">Email:</label>-->
+<!--    <input type="email" id="email" name="email" required>-->
+<!--    <button type="submit">Submit</button>-->
+<!--</form>-->
 </html>

@@ -16,12 +16,17 @@ const myUserdata = req.body.email
    console.log(" The User Data is :", myUserdata )
 
     console.log(" The object that I created today ", dataToPrint)
-    res.send({
-        Firstname:dataToPrint.firstName,
-        lastName:dataToPrint.lastName,
-        email:dataToPrint.email,
-        teamID:dataToPrint.teamID
-    })
+    if(typeof dataToPrint === "string")
+        res.send({message: 'user not found'})
+    else{
+
+        res.send({
+            firstname:dataToPrint.firstName,
+            lastName:dataToPrint.lastName,
+            email:dataToPrint.email,
+            teamID:dataToPrint.teamID
+        })
+    }
 })
 
 

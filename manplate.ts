@@ -7,9 +7,16 @@ export type RequestData = {
 
 export async function receiveUserData(email:string){
 
-  const userData =  await getUserData(email)
 
-    return extractData(userData)
+        const userData = await getUserData(email)
+    console.log('user data--??',userData)
+    if(userData.length!==0)
+
+        return extractData(userData)
+//
+else{
+    return 'user not found'
+    }
 
 }
 
