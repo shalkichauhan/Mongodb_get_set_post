@@ -9,13 +9,18 @@ const pathjoin= path.join(__dirname,'/public')
 app.use(express.static(pathjoin))
 app.use(express.json());
 
-app.post('/details',(req:RequestData,res:any)=>{
+app.post('/details',async (req:RequestData,res:any)=>{
 const myUserdata = req.body.email
-    receiveUserData(req.body.email)
+    const dataToPrint = await receiveUserData(req.body.email)
 
    console.log(" The User Data is :", myUserdata )
+
+    console.log(" The object that I created today ", dataToPrint)
     res.send({
-        message:" Successfully received!"
+        Firstname:dataToPrint.firstName,
+        lastName:dataToPrint.lastName,
+        email:dataToPrint.email,
+        teamID:dataToPrint.teamID
     })
 })
 

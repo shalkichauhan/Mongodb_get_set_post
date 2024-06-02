@@ -9,14 +9,20 @@ export async function receiveUserData(email:string){
 
   const userData =  await getUserData(email)
 
-    extractData(userData)
+    return extractData(userData)
 
 }
 
 
 async function extractData(userData){
 
-console.log("The first name is :", userData[0].properties.profile.name.first)
-console.log("The last name is :", userData[0].properties.profile.name.last)
+    return {
+        firstName : userData[0].properties.profile.name.first,
+        lastName : userData[0].properties.profile.name.last,
+        email: userData[0].email,
+        teamID : userData[0].properties._tid
+    };
+
+
 
 }
