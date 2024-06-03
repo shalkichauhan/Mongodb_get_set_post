@@ -1,3 +1,5 @@
+import {UserObject} from "./types";
+
 const mongodb = require('mongodb')
 
 const MongoClient = mongodb.MongoClient
@@ -14,7 +16,7 @@ export async function getUserData(parameter:string) {
         const db =  client.db(databaseName)
 
 
-       const userData =  await db.collection('user_details').find({'email':parameter}).toArray()
+       const userData :UserObject=  await db.collection('user_details').find({'email':parameter}).toArray()
 
         return userData;
 

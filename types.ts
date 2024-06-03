@@ -24,7 +24,7 @@ type Name={
 
 
 
-export type UserObject  = {
+export type UserObject  = Array< {
     _id : typeof ObjectId,
     status:string,
     properties: Properties,
@@ -33,10 +33,10 @@ export type UserObject  = {
     email:string,
     _originalEmail:string
 
-}
+}>
 
 export type DataToPrint = {
-    firstname:string,
+    firstName:string,
     lastName:string,
     email:string,
     teamID:string

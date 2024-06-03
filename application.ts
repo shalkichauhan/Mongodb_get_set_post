@@ -1,4 +1,5 @@
 import { receiveUserData, RequestData} from "./manplate";
+import {DataToPrint} from "./types";
 
 const express = require('express')
 const app = express();
@@ -11,7 +12,7 @@ app.use(express.json());
 
 app.post('/details',async (req:RequestData,res:any)=>{
 const myUserdata = req.body.email
-    const dataToPrint = await receiveUserData(req.body.email)
+    const dataToPrint :DataToPrint | string = await receiveUserData(req.body.email)
 
    console.log(" The User Data is :", myUserdata )
 

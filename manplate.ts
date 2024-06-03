@@ -1,4 +1,5 @@
 import {getUserData} from "./mongodbData";
+import {DataToPrint} from "./types";
 
 export type RequestData = {
     body:{
@@ -21,7 +22,7 @@ else{
 }
 
 
-async function extractData(userData){
+ function extractData(userData):DataToPrint{
 
     return {
         firstName : userData[0].properties.profile.name.first,
