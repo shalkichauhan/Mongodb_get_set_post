@@ -1,5 +1,5 @@
-import {manuplateData} from "./manplate";
-
+import { receiveUserData, RequestData} from "./manplate";
+import {DataToPrint} from "./types";
 
 const express = require('express')
 const app = express();
@@ -10,13 +10,24 @@ const pathjoin= path.join(__dirname,'/public')
 app.use(express.static(pathjoin))
 app.use(express.json());
 
-app.post('/details',(req:any,res:any)=>{
-const myUserdata = req.body.data
-    manuplateData(req.body.data)
+app.post('/details',async (req:RequestData,res:any)=>{
+const myUserdata = req.body.email
+    const dataToPrint :DataToPrint | string = await receiveUserData(req.body.email)
+
    console.log(" The User Data is :", myUserdata )
-    res.send({
-        message:" Successfully received!"
-    })
+
+    console.log(" The object that I created today ", dataToPrint)
+    if(typeof dataToPrint === "string")
+        res.send({message: 'user not found'})
+    else{
+
+        res.send({
+            firstname:dataToPrint.firstName,
+            lastName:dataToPrint.lastName,
+            email:dataToPrint.email,
+            teamID:dataToPrint.teamID
+        })
+    }
 })
 
 

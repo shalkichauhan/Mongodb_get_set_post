@@ -8,8 +8,8 @@ var pathjoin = path.join(__dirname, '/public');
 app.use(express.static(pathjoin));
 app.use(express.json());
 app.post('/details', function (req, res) {
-    var myUserdata = req.body.data;
-    (0, manplate_1.manuplateData)(req.body.data);
+    var myUserdata = req.body.email;
+    (0, manplate_1.manuplateData)(req.body.email);
     console.log(" The User Data is :", myUserdata);
     res.send({
         message: " Successfully received!"
