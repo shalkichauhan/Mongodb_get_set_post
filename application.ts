@@ -12,22 +12,28 @@ app.use(express.json());
 
 app.post('/details',async (req:RequestData,res:any)=>{
 const myUserdata = req.body.email
-    const dataToPrint :DataToPrint | string = await receiveUserData(req.body.email)
+    myUserdata.trim();
 
-   console.log(" The User Data is :", myUserdata )
+    const arr:string[]= myUserdata.split(',')
 
-    console.log(" The object that I created today ", dataToPrint)
+
+    const dataToPrint :DataToPrint[] | string = await receiveUserData(arr)
+
+
+    //console.log(" The object that I created today ", dataToPrint)
     if(typeof dataToPrint === "string")
         res.send({message: 'user not found'})
     else{
 
-        res.send({
-            firstname:dataToPrint.firstName,
-            lastName:dataToPrint.lastName,
-            email:dataToPrint.email,
-            teamID:dataToPrint.teamID
-        })
+
+
+        res.send()
+
+
+
     }
+
+
 })
 
 
@@ -35,3 +41,8 @@ app.listen(3000,()=>{
     console.log(" server is running!")
 });
 
+// const str= dffhg,shfhrjuhfr,hsdhufd,edhfda
+//let arr = []
+// arr.push(str.slice())'
+// const arr = str.split()
+//

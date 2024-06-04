@@ -8,21 +8,30 @@ const url = 'mongodb://localhost:27017/';
 
 const databaseName = 'user'
 
-export async function getUserData(parameter:string) {
+export async function getUserData(parameter:string[]) {
+
+    const client = await MongoClient.connect(url);
+
+    const db =  client.db(databaseName)
+
+    let validUserObject: UserObject[] =[]
+
+    for(let email of parameter){
 
     try {
-        const client = await MongoClient.connect(url);
+       const userData =await db.collection('user_details').find({'email':email}).toArray()
 
-        const db =  client.db(databaseName)
+        if(userData.length>0){
+            validUserObject.push(userData[0])
+        }
 
 
-       const userData :UserObject=  await db.collection('user_details').find({'email':parameter}).toArray()
-
-        return userData;
 
     }catch(error){
         console.log(error)
     }
 
+}
+    return validUserObject
 }
 

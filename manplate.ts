@@ -1,16 +1,18 @@
 import {getUserData} from "./mongodbData";
-import {DataToPrint} from "./types";
+import {DataToPrint, UserObject} from "./types";
 
 export type RequestData = {
     body:{
      email:string,
 } }
 
-export async function receiveUserData(email:string){
+export async function receiveUserData(emails:string[]){
 
 
-        const userData = await getUserData(email)
-    console.log('user data--??',userData)
+        const userData:UserObject[] = await getUserData(emails)
+
+    console.log('-----',userData)
+
     if(userData.length!==0)
 
         return extractData(userData)
@@ -22,15 +24,23 @@ else{
 }
 
 
- function extractData(userData):DataToPrint{
+ function extractData(userData):DataToPrint[]{
+   // console.log(userData, " This is my userData that has 2 objects in an array")
+let ArrayObject = [];
 
-    return {
-        firstName : userData[0].properties.profile.name.first,
-        lastName : userData[0].properties.profile.name.last,
-        email: userData[0].email,
-        teamID : userData[0].properties._tid
-    };
+let printingWHoleData;
 
+for(let value in userData){
+    printingWHoleData ={
+        firstName: userData[value].properties.profile.name.first,
+        lastName: userData[value].properties.profile.name.last,
+        email: userData[value].email,
+        teamID: userData[value].properties._tid
 
+    }
+    ArrayObject.push(printingWHoleData)
+}
+
+ return ArrayObject
 
 }
