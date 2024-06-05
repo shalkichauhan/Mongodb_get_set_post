@@ -1,3 +1,140 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Button and Text Area Example</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 20px;-->
+<!--        }-->
+<!--        .container {-->
+<!--            max-width: 600px;-->
+<!--            margin: auto;-->
+<!--            text-align: center;-->
+<!--        }-->
+<!--        textarea {-->
+<!--            width: 100%;-->
+<!--            height: 100px;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+<!--        button {-->
+<!--            margin-top: 10px;-->
+<!--            padding: 10px 20px;-->
+<!--            font-size: 16px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+
+<!--<div class="container">-->
+<!--    <h1>Button and Text Area Example</h1>-->
+<!--    <textarea id="textArea" placeholder="Type your text here..."></textarea>-->
+<!--    <br>-->
+<!--    <button id="click_here">Click Me</button>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    try {-->
+
+<!--        let firstName, lastName, email, teamID-->
+
+<!--        async function myFun() {-->
+<!--            const textAreaContent = document.getElementById('textArea').value;-->
+<!--            const response = await fetch('/details', {-->
+<!--                method: 'POST',-->
+<!--                headers: {-->
+<!--                    'content-type': 'application/json'-->
+<!--                },-->
+<!--                body: JSON.stringify({email: textAreaContent})-->
+<!--            })-->
+<!--            if (response) {-->
+
+
+<!--                const data = await response.json()-->
+
+<!--                if (data.message) {-->
+<!--                    console.log(data.message)-->
+<!--                } else {-->
+
+
+<!--                    firstName = data.firstname-->
+
+<!--                    lastName = data.lastName-->
+<!--                    email = data.email-->
+<!--                    teamID = data.teamID-->
+<!--                    document.getElementById('firstNameCell').textContent = firstName;-->
+<!--                    document.getElementById('lastNameCell').textContent = lastName;-->
+<!--                    document.getElementById('emailCell').textContent = email;-->
+<!--                    document.getElementById('teamIDCell').textContent = teamID;-->
+
+
+
+<!--                }-->
+<!--            }-->
+
+<!--        }-->
+
+<!--        document.getElementById('click_here').addEventListener('click', myFun)-->
+
+
+<!--    }catch(error){-->
+<!--        console.log(" there is an error to get the Data from !details!!!!!!!! endPoint", error)-->
+<!--    }-->
+
+
+
+<!--</script>-->
+
+
+
+<!--</body>-->
+<!--<body><table border="1">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Header 1</th>-->
+<!--        <th>Header 2</th>-->
+
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--        <td>First Name</td>-->
+<!--        &lt;!&ndash;        <td>{firstName}</td>&ndash;&gt;-->
+<!--        <td id="firstNameCell"></td>-->
+
+
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>Last Name </td>-->
+<!--        &lt;!&ndash;        <td> {{lastName}}</td>&ndash;&gt;-->
+<!--        <td id="lastNameCell"></td>-->
+<!--    </tr>-->
+<!--    </tr>-->
+
+<!--    <td>email</td>-->
+<!--    &lt;!&ndash;    <td> {{email}}</td>&ndash;&gt;-->
+<!--    <td id="emailCell"></td>-->
+
+<!--    <tr>-->
+<!--    </tr>-->
+<!--    <td>Team ID</td>-->
+<!--    &lt;!&ndash;    <td> {{teamID} }</td>&ndash;&gt;-->
+<!--    <td id="teamIDCell"></td>-->
+
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--&lt;!&ndash;<form id="userForm">&ndash;&gt;-->
+<!--&lt;!&ndash;    <label for="email">Email:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="email" id="email" name="email" required>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button type="submit">Submit</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,109 +163,28 @@
         }
     </style>
 </head>
-
-
+<body>
 <div class="container">
     <h1>Button and Text Area Example</h1>
     <textarea id="textArea" placeholder="Type your text here..."></textarea>
     <br>
-    <button id="click_here">Click Me</button>
+    <button id="myButton">Click Me</button>
 </div>
 
 <script>
-    try {
+    document.getElementById('myButton').addEventListener('click', htmlPostRequest);
 
-        let firstName, lastName, email, teamID
+        function htmlPostRequest() {
+        const emailEnteredByUser = document.getElementById('textArea').value;
+        fetch('/user',{
+            method:'POST',
+            headers:{
+                'content-type': 'application/json'
 
-        async function myFun() {
-            const textAreaContent = document.getElementById('textArea').value;
-            const response = await fetch('/details', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({email: textAreaContent})
-            })
-            if (response) {
-
-
-                const data = await response.json()
-
-                if (data.message) {
-                    console.log(data.message)
-                } else {
-
-
-                    firstName = data.firstname
-
-                    lastName = data.lastName
-                    email = data.email
-                    teamID = data.teamID
-                    document.getElementById('firstNameCell').textContent = firstName;
-                    document.getElementById('lastNameCell').textContent = lastName;
-                    document.getElementById('emailCell').textContent = email;
-                    document.getElementById('teamIDCell').textContent = teamID;
-
-
-
-                }
-            }
-
-        }
-
-        document.getElementById('click_here').addEventListener('click', myFun)
-
-
-    }catch(error){
-        console.log(" there is an error to get the Data from !details!!!!!!!! endPoint", error)
+            },
+            body: JSON.stringify({sendDataToApplicationPage:emailEnteredByUser})
+        })
     }
-
-
-
 </script>
-
-
-
 </body>
-<body><table border="1">
-    <thead>
-    <tr>
-        <th>Header 1</th>
-        <th>Header 2</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>First Name</td>
-        <!--        <td>{firstName}</td>-->
-        <td id="firstNameCell"></td>
-
-
-    </tr>
-    <tr>
-        <td>Last Name </td>
-        <!--        <td> {{lastName}}</td>-->
-        <td id="lastNameCell"></td>
-    </tr>
-    </tr>
-
-    <td>email</td>
-    <!--    <td> {{email}}</td>-->
-    <td id="emailCell"></td>
-
-    <tr>
-    </tr>
-    <td>Team ID</td>
-    <!--    <td> {{teamID} }</td>-->
-    <td id="teamIDCell"></td>
-
-    </tr>
-    </tbody>
-</table>
-<!--<form id="userForm">-->
-<!--    <label for="email">Email:</label>-->
-<!--    <input type="email" id="email" name="email" required>-->
-<!--    <button type="submit">Submit</button>-->
-<!--</form>-->
 </html>

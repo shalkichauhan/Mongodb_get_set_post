@@ -1,7 +1,7 @@
-//all our types
+// //all our types
 const ObjectId = require('mongodb')
-
-
+//
+//
 type Properties= {
     platformManaged:boolean,
     _tid:string,
@@ -21,9 +21,9 @@ type Name={
     middle?:string,
     last:string
 }
-
-
-
+//
+//
+//
 export type UserObject  = Array< {
     _id : typeof ObjectId,
     status:string,
@@ -34,10 +34,42 @@ export type UserObject  = Array< {
     _originalEmail:string
 
 }>
-
-export type DataToPrint = {
-    firstName:string,
-    lastName:string,
-    email:string,
-    teamID:string
+//
+// export type DataToPrint = {
+//     firstName:string,
+//     lastName:string,
+//     email:string,
+//     teamID:string
+// }
+export type DataToSend={
+    name:{
+        first:string
+    },
+    _tid:string
 }
+
+
+
+
+
+
+export type Request={
+    body:{
+    sendDataToApplicationPage: string
+
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
